@@ -3,6 +3,9 @@ RUN docker-php-ext-install pdo pdo_mysql
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . /var/www/html/
-RUN composer install
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+RUN composer install 
 
 CMD ["php-fpm"]

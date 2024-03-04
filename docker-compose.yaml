@@ -24,7 +24,7 @@ services:
     volumes:
       - ./backend:/var/www/html
     ports:
-      - "9000:9000"
+      - "8000:8000"
     environment:
       DATABASE_URL: "mysql://user:password@db:3306/database_name"
 
