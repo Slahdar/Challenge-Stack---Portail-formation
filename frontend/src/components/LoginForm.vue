@@ -30,7 +30,7 @@
     username: this.username,
     password: this.password,
   };
-  fetch('URL_DE_VOTRE_API', {
+  fetch('url api symfony', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
