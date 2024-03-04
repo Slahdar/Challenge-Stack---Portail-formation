@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/var/www/backend
+    depends_on:
+      - mysql
+    networks:
+      - mynetwork
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/var/www/frontend
+    depends_on:
+      - backend
+    networks:
+      - mynetwork
+
+  mysql:
+    image: mysql:8.0
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: portail-formation
+    ports:
+      - "3306:3306"
+    volumes:
+      - database_data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: 
+    ports:
+      - 8080:80
+    networks:
+      - mynetwork
+volumes:
+  database_data:
+networks:
+      - mynetwork
