@@ -24,13 +24,13 @@ services:
     volumes:
       - ./backend:/var/www/html
     ports:
-      - "9000:9000"
+      - "8000:8000"
     environment:
       DATABASE_URL: "mysql://user:password@db:3306/database_name"
 
   # Service pour phpMyAdmin
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.0
+    image: phpmyadmin/phpmyadmin:5.2
     container_name: phpmyadmin
     environment:
       PMA_HOST: db
@@ -42,7 +42,7 @@ services:
 
   # Service pour MySQL
   db:
-    image: mysql:5.7
+    image: mysql:8.0
     container_name: mysql-db
     volumes:
       - db_data:/var/lib/mysql
